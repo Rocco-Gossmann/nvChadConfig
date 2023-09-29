@@ -3,15 +3,21 @@ local M = {}
 
 M.splits = {
   n = {
-    ["El"] = { ":vs<cr>", "new Right", opts = { nowait = true } },
-    ["Eh"] = { ":vs<cr><C-w>h", "new Left", opts = { nowait = true } },
-    ["Ej"] = { ":sp<cr>", " new Bottom", opts = { nowait = true } },
-    ["Ek"] = { ":sp<cr><C-w>k", "new Top", opts = { nowait = true } },
+    ["El"] = { "<cmd> vs<cr>", "new Right", opts = { nowait = true } },
+    ["Eh"] = { "<cmd> vs<cr><C-w>h", "new Left", opts = { nowait = true } },
+    ["Ej"] = { "<cmd> sp<cr>", " new Bottom", opts = { nowait = true } },
+    ["Ek"] = { "<cmd> sp<cr><C-w>k", "new Top", opts = { nowait = true } },
 
     ["<C-h>"] = { function() require("nvim-tmux-navigation").NvimTmuxNavigateLeft() end, "go left", opts = { silent = true }, },
     ["<C-j>"] = { function() require("nvim-tmux-navigation").NvimTmuxNavigateDown() end, "go down", opts = { silent = true }, },
     ["<C-k>"] = { function() require("nvim-tmux-navigation").NvimTmuxNavigateUp() end, "go up", opts = { silent = true }, },
     ["<C-l>"] = { function() require("nvim-tmux-navigation").NvimTmuxNavigateRight() end, "go right", opts = { silent = true }, },
+
+	["<C-Left>"] = { "<C-w><", "Grow Horizontal", opts={} },
+	["<C-Right>"] = { "<C-w>>", "Shrink Horizontal", opts={} },
+	["<C-Up>"] = { "<C-w>-", "Shrink Vertical", opts={} },
+	["<C-DOwn>"] = { "<C-w>+", "Grow Vertical", opts={} }
+
 
     --    [";"] = { ":", "enter command mode", opts = { nowait = true } },
   },
