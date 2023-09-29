@@ -12,6 +12,9 @@ M.treesitter = {
     "c",
     "markdown",
     "markdown_inline",
+    "go",
+    "gomod",
+    "gowork",
   },
   indent = {
     enable = true,
@@ -26,6 +29,10 @@ M.mason = {
     -- lua stuff
     "lua-language-server",
     "stylua",
+
+	-- Go
+	"gopls",
+	"goimports",
 
     -- web dev stuff
     "css-lsp",
