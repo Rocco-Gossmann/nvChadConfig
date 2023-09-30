@@ -18,7 +18,7 @@ local function attachSettings(defSettings, file)
   if vim.fn.findfile(file) ~= "" then
     local tab2 = dofile(file)
     if type(tab2) ~= "table" then
-      print ("given lsp settings by '"..file.."' are not a table")
+      print("given lsp settings by '" .. file .. "' are not a table")
       return defSettings
     end
     return recurse(defSettings, dofile(file))
@@ -27,22 +27,19 @@ local function attachSettings(defSettings, file)
   end
 end
 
-local function loadServerSettings(lspName)
-  local returnSettings = {}
+
+local function appendSetup(su, lspName)
   local defaultSettings = {}
-
   if pcall(require, "custom.lsp." .. lspName) then
-		defaultSettings = require("custom.lsp." .. lspName)
+    defaultSettings = require("custom.lsp." .. lspName)
   end
 
-  if type(defaultSettings) ~= "table" then
-    defaultSettings = {}
-  end
-  returnSettings = attachSettings(defaultSettings, vim.fn.getcwd() .. "/.nvim/" .. lspName .. ".settings.lua")
+  su = recurse(su, defaultSettings)
+  su = attachSettings(su.settings, vim.fn.getcwd() .. "/.nvim/" .. lspName .. ".settings.lua")
 
-  return returnSettings
+  return su
 end
 
 return {
-  loadServerSettings = loadServerSettings,
+  appendSetup = appendSetup,
 }
