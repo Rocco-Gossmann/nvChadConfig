@@ -1,4 +1,4 @@
-dap.adapters.chrome = {
+require("dap").adapters.chrome = {
     type = "executable",
     command = "chrome-debug-adapter",
 }
