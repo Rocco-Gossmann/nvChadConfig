@@ -8,10 +8,11 @@ You may create a `.nvim` folder inside any **working directory** you want.
 
 within there, you can create (as of now) 2 files.
 
-| file       | description                                                   |
-| ---------- | ------------------------------------------------------------- |
-| `init.lua` | contains vim specific configurations                          |
-| `lsp.lua`  | to set up the (L)anguage-(S)erver-(P)rotocol for your Project |
+| file       | description                                                           |
+| ---------- | --------------------------------------------------------------------- |
+| `init.lua` | contains vim specific configurations                                  |
+| `lsp.lua`  | to set up the (L)anguage-(S)erver-(P)rotocol for your Project         |
+| `dap.lua`  | All your configurations for the (D)ebug-(A)dapter-(P)rotocol go here. |
 
 ## Project specific Language Server Settings
 
@@ -35,6 +36,54 @@ you you only have to change, what you need, not redefine everything).
 | `clangd`        | `clangd.settings.lua`   | CLangd                |
 
 Please refere to the `.nvim-example` folder in this repo.
+
+### DAP configurations.
+
+The Adapters are configured in this Repos `dap/adapters/init.lua`.
+
+To install them I recommend Mason.\
+To activate them / make them visible to DAP you need to define an executable
+Adapter, you need to setup a minimal executable config using the Adapters-Name
+you got from Mason as the command.
+
+```lua
+dap.adapters.chrome = {
+    type = "executable",
+    command = "chrome-debug-adapter",
+}
+```
+
+### DAP configurations.
+
+the "Launch" - configurations are defined on a per project basis again. See the
+Project specific configuration section above. The go into the
+`[projectroot]/.nvim/dap.lua` file
+
+Here is an example, using the Adapter from above to open the Brave-Browser on
+MacOS, and navigate to a remote servers URL when ever you are on a `html`,
+`css`, or `javascript` file.
+
+```lua
+local dap = require("dap")
+
+-- Setup a launch config for each of these 3 filetypes
+local filetypes = { "javascript", "html", "css" }
+
+for _, filetype in pairs(filetypes) do
+	dap.configurations[filetype] = {
+		{
+			request = "launch",
+			type = "chrome",
+			url = "http://localhost:7353",
+			webRoot = "${workspaceFolder}",
+			runtimeExecutable = "/Applications/Brave Browser.app/Contents/MacOS/Brave Browser",
+			userDataDir = true,
+		},
+	}
+end
+```
+
+To start a Debug-Session just hit `<leader>ds`
 
 ## Telescope/Finder changes
 

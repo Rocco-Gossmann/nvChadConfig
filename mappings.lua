@@ -3,12 +3,19 @@ local M = {}
 
 M.debugging = {
   n = {
-    ["<leader>d<space>"] = { function() require("dapui").eval() end, "Debug: Eval" },
+    ["<leader>d<space>"] = {
+      function()
+        require("dapui").eval()
+      end,
+      "Debug: Eval",
+    },
     ["<leader>db"] = { vim.cmd.DapToggleBreakpoint, "Debug: Toggle Breakpoint" },
     ["<leader>ds"] = {
       function()
-        vim.inspect(require "dap")
-        require("dapui").open()
+        local dap = require "dap"
+        local dapui = require "dapui"
+        vim.inspect(dap)
+        dapui.open()
         vim.cmd.DapContinue()
       end,
       "Debug: Start/Continue",

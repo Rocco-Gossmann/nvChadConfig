@@ -51,7 +51,12 @@ local function appendSetup(su, lspName)
   return su
 end
 
+local function __DIR__()
+	return debug.getinfo(3).source:match("@?(.*/)")
+end
+
 return {
   appendSetup = appendSetup,
   printRecursive = printRecursive,
+	__DIR__ = __DIR__
 }
