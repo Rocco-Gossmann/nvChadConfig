@@ -11,6 +11,10 @@ local sources = {
   -- Lua
   b.formatting.stylua,
 
+  -- Lua
+  b.formatting.gofmt,
+  b.formatting.goimports,
+
   -- cpp
   b.formatting.clang_format,
 }
