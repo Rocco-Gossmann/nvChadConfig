@@ -16,6 +16,9 @@ M.treesitter = {
     "gomod",
     "gowork",
   },
+  highlight = {
+    additional_vim_regex_highlighting = false,
+  },
   indent = {
     enable = true,
     -- disable = {
@@ -30,9 +33,9 @@ M.mason = {
     "lua-language-server",
     "stylua",
 
-	-- Go
-	"gopls",
-	"goimports",
+    -- Go
+    "gopls",
+    "goimports",
 
     -- web dev stuff
     "css-lsp",

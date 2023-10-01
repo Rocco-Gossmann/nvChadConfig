@@ -27,6 +27,17 @@ local function attachSettings(defSettings, file)
   end
 end
 
+local function printRecursive(t, indent)
+  indent = indent or ""
+  for k, v in pairs(t) do
+    if type(v) == "table" then
+      vim.api.nvim_buf_set_lines(0, -1, -1, false, {indent .. k .. ":"})
+      printRecursive(v, indent .. "  ")
+    else
+      vim.api.nvim_buf_set_lines(0, -1, -1, false, { indent .. k .. ": " .. tostring(v)})
+    end
+  end
+end
 
 local function appendSetup(su, lspName)
   local defaultSettings = {}
@@ -35,11 +46,12 @@ local function appendSetup(su, lspName)
   end
 
   su = recurse(su, defaultSettings)
-  su = attachSettings(su.settings, vim.fn.getcwd() .. "/.nvim/" .. lspName .. ".settings.lua")
+  su.settings = attachSettings(su.settings, vim.fn.getcwd() .. "/.nvim/" .. lspName .. ".settings.lua")
 
   return su
 end
 
 return {
   appendSetup = appendSetup,
+  printRecursive = printRecursive,
 }
