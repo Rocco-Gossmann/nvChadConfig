@@ -13,16 +13,17 @@ local plugins = {
 	},
 
 
-	--[[ Markdown 
+	--[[ Debuggers and Runners 
 ------------------------------------------------------------------------------]]
-
 	{ "iamcco/markdown-preview.nvim",
 		ft={"markdown"},
 		build = function() vim.fn["mkdp#util#install"]() end,
 	},
 
-
-
+	{ "rcarriga/nvim-dap-ui",
+		lazy=false,
+		dependencies = { 'mfussenegger/nvim-dap', }
+	},
 
 	-- Override plugin definition options
 

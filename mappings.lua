@@ -1,6 +1,31 @@
 ---@type MappingsTable
 local M = {}
 
+M.debugging = {
+  n = {
+    ["<leader>d<space>"] = { function() require("dapui").eval() end, "Debug: Eval" },
+    ["<leader>db"] = { vim.cmd.DapToggleBreakpoint, "Debug: Toggle Breakpoint" },
+    ["<leader>ds"] = {
+      function()
+        vim.inspect(require "dap")
+        require("dapui").open()
+        vim.cmd.DapContinue()
+      end,
+      "Debug: Start/Continue",
+    },
+    ["<leader>dh"] = { vim.cmd.DapStepInto, "Debug: Step into" },
+    ["<leader>dj"] = { vim.cmd.DapStepOver, "Debug: Step over" },
+    ["<leader>dk"] = { vim.cmd.DapStepOut, "Debug: Step out" },
+    ["<leader>dd"] = {
+      function()
+        require("dapui").close()
+        vim.cmd.DapTerminate()
+      end,
+      "Debug: Stop",
+    },
+  },
+}
+
 M.splits = {
   n = {
     ["El"] = { "<cmd> vs<cr>", "new Right", opts = { nowait = true } },
@@ -111,6 +136,9 @@ M.general = {
       "show completion",
       opts = {},
     },
+
+    ["<C-l>"] = { noass(), "-" },
+    ["<C-k>"] = { noass(), "-" },
   },
   v = {
     ["."] = { "c..<ESC>hmzplv`z", opts = { silent = true } },
