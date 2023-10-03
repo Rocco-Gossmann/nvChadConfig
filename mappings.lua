@@ -130,6 +130,14 @@ M.general = {
 
     ["<leader>cd"] = { vim.diagnostic.open_float, "code diagnostic", opts = {} },
     ["<leader>h"] = { vim.lsp.buf.hover, "show hover", opts = {} },
+
+    ["<leader>ra"] = { noass(), "-" },
+    ["<leader>cr"] = {
+      function()
+        require("nvchad.renamer").open()
+      end,
+      "LSP rename",
+    },
   },
 
   i = {
