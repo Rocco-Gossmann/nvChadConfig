@@ -40,13 +40,18 @@ vim.opt.cursorline = true
 vim.opt.smartindent = true
 vim.opt.autoindent = true
 
-vim.api.nvim_create_autocmd("BufAdd", {
-  callback = function()
+vim.api.nvim_create_autocmd("BufEnter", {
+
+	callback = function()
     vim.schedule(function()
       vim.opt.foldlevelstart = 99
       vim.opt.foldmethod = "expr"
       vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
     end)
+
+	vim.api.nvim_set_keymap("n", "q", "<cmd>noh<cr>", {silent=true, noremap=true})
+	vim.api.nvim_set_keymap("n", "Q", "q", {noremap=true})
+	vim.api.nvim_set_keymap("n", "s", "@", {noremap=true})
   end,
 })
 
