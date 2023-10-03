@@ -26,31 +26,36 @@ vim.opt.termguicolors = true
 
 vim.opt.scrolloff = 6
 vim.opt.signcolumn = "yes"
-vim.opt.isfname:append("@-@")
+vim.opt.isfname:append "@-@"
 
 vim.opt.updatetime = 50
 
 vim.opt.colorcolumn = "80"
 
-vim.opt.nrformats:append("alpha")
+vim.opt.nrformats:append "alpha"
 
-vim.opt.grepprg="rg -n -i -g -L --ignore-file .rgignore $* /dev/null"
+vim.opt.grepprg = "rg -n -i -g -L --ignore-file .rgignore $* /dev/null"
 
 vim.opt.cursorline = true
 vim.opt.smartindent = true
 vim.opt.autoindent = true
 
-vim.opt.foldlevelstart = 99
+vim.api.nvim_create_autocmd("BufAdd", {
+  callback = function()
+    vim.schedule(function()
+      vim.opt.foldlevelstart = 99
+      vim.opt.foldmethod = "expr"
+      vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+    end)
+  end,
+})
 
-local projectInitFile = vim.fn.getcwd() .. "/.nvim/init.lua";
-if vim.fn.findfile(projectInitFile) ~= '' then
-	local fn = dofile(projectInitFile)
-	local fnt = type(fn);
+local projectInitFile = vim.fn.getcwd() .. "/.nvim/init.lua"
+if vim.fn.findfile(projectInitFile) ~= "" then
+  local fn = dofile(projectInitFile)
+  local fnt = type(fn)
 
-	if fnt == 'function' then
-		vim.schedule(fn)
-	end
+  if fnt == "function" then
+    vim.schedule(fn)
+  end
 end
-
-
-
