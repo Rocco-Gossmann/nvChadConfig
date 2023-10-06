@@ -42,17 +42,25 @@ vim.opt.autoindent = true
 
 vim.api.nvim_create_autocmd("BufEnter", {
 
-	callback = function()
+  callback = function()
     vim.schedule(function()
       vim.opt.foldlevelstart = 99
       vim.opt.foldmethod = "expr"
       vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
     end)
 
-	vim.api.nvim_set_keymap("n", "q", "<cmd>noh<cr>", {silent=true, noremap=true})
-	vim.api.nvim_set_keymap("n", "Q", "q", {noremap=true})
-	vim.api.nvim_set_keymap("n", "s", "@", {noremap=true})
+    vim.api.nvim_set_keymap("n", "q", "<cmd>noh<cr>", { silent = true, noremap = true })
+    vim.api.nvim_set_keymap("n", "Q", "q", { noremap = true })
+    vim.api.nvim_set_keymap("n", "s", "@", { noremap = true })
   end,
+})
+
+vim.api.nvim_create_autocmd("BufEnter", {
+	pattern="*.md",
+	callback = function()
+		vim.cmd("MarkdownPreview")
+	end
+
 })
 
 local projectInitFile = vim.fn.getcwd() .. "/.nvim/init.lua"
