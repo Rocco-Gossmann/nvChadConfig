@@ -63,6 +63,14 @@ vim.api.nvim_create_autocmd("BufEnter", {
 
 })
 
+vim.api.nvim_create_autocmd("BufLeave", {
+	pattern="*.md",
+	callback = function()
+		vim.cmd("MarkdownPreviewStop")
+	end
+
+})
+
 local projectInitFile = vim.fn.getcwd() .. "/.nvim/init.lua"
 if vim.fn.findfile(projectInitFile) ~= "" then
   local fn = dofile(projectInitFile)
