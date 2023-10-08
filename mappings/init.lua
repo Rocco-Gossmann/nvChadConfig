@@ -17,13 +17,13 @@ local function ftMappings(m, mo)
       local tfn = type(fn)
       if tfn == "table" then
         for _, v in pairs(fn) do
-		  local tv = type(v)
-		  if tv == "string" then
-			local keys = vim.api.nvim_replace_termcodes(v, true, false, true)
-			vim.api.nvim_feedkeys(keys, mo, false)
-		  elseif tv == "function" then
-			v()
-		  end
+          local tv = type(v)
+          if tv == "string" then
+            local keys = vim.api.nvim_replace_termcodes(v, true, false, true)
+            vim.api.nvim_feedkeys(keys, mo, false)
+          elseif tv == "function" then
+            v()
+          end
         end
       end
 
@@ -169,6 +169,32 @@ M.general = {
       "LSP rename",
     },
 
+    ["ZQ"] = {
+      function()
+        require("nvchad.tabufline").close_buffer()
+      end,
+      "Close Buffer",
+    },
+
+    ["<S-l>"] = {
+      function()
+        require("nvchad.tabufline").tabuflineNext()
+      end,
+      "Goto next buffer",
+    },
+
+    ["<S-h>"] = {
+      function()
+        require("nvchad.tabufline").tabuflinePrev()
+      end,
+      "Goto next buffer",
+    },
+
+	["<leader><S-m>"] = {
+			"<cmd> DBUIToggle <CR>",
+			"MySQL Client"
+			},
+
     ["q-"] = { ftMappings("q-", "n") },
     ["q."] = { ftMappings("q.", "n") },
     ["q,"] = { ftMappings("q,", "n") },
@@ -225,7 +251,6 @@ M.general = {
 
     ["<C-l>"] = { noass(), "-" },
     ["<C-k>"] = { noass(), "-" },
-
   },
   v = {
     ["."] = { "c..<ESC>hmzplv`z", opts = { silent = true } },
