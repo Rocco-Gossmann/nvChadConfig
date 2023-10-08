@@ -33,8 +33,32 @@ local plugins = {
     end,
   },
 
-  -- Override plugin definition options
+  --[[ Debuggers and Runners 
+------------------------------------------------------------------------------]]
+  -- Mysql / Db client
+  { "tpope/vim-dadbod", lazy=false },
+  { "kristijanhusak/vim-dadbod-ui", lazy=false},
+  {
+    "kristijanhusak/vim-dadbod-completion",
+    lazy = false,
+    config = function()
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = { "sql" },
+        command = [[setlocal omnifunc=vim_dadbod_competion#omni]],
+      })
 
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = { "sql", "mysql", "plsql" },
+        callback = function()
+          vim.schedule(function()
+            require("cmp").setup.buffer { sources = { { name = "vim-dadbod-completion" } } }
+          end)
+        end,
+      })
+    end,
+  },
+
+  -- Override plugin definition options
   {
     "neovim/nvim-lspconfig",
     dependencies = {
