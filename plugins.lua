@@ -33,14 +33,14 @@ local plugins = {
     end,
   },
 
-  --[[ Debuggers and Runners 
+  --[[ Database Clients
 ------------------------------------------------------------------------------]]
-  -- Mysql / Db client
-  { "tpope/vim-dadbod", lazy=false },
-  { "kristijanhusak/vim-dadbod-ui", lazy=false},
+  { "kristijanhusak/vim-dadbod-ui", dependencies = {
+    { "tpope/vim-dadbod" },
+  } },
   {
     "kristijanhusak/vim-dadbod-completion",
-    lazy = false,
+    ft = { "mysql" },
     config = function()
       vim.api.nvim_create_autocmd("FileType", {
         pattern = { "sql" },
