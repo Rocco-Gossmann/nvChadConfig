@@ -169,13 +169,6 @@ M.general = {
       "LSP rename",
     },
 
-    ["ZQ"] = {
-      function()
-        require("nvchad.tabufline").close_buffer()
-      end,
-      "Close Buffer",
-    },
-
     ["<S-l>"] = {
       function()
         require("nvchad.tabufline").tabuflineNext()
