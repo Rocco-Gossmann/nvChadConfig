@@ -6,7 +6,7 @@ this config has a few changes compared to NvChads default, example config.
 
 You may create a `.nvim` folder inside any **working directory** you want.
 
-within there, you can create (as of now) 2 files.
+within there, you can create (as of now) 3 files.
 
 | file       | description                                                           |
 | ---------- | --------------------------------------------------------------------- |
@@ -87,30 +87,32 @@ To start a Debug-Session just hit `<leader>ds`
 
 ## Telescope/Finder changes
 
-| key          | effect                                                         |
-| ------------ | -------------------------------------------------------------- |
-| `<leader>ff` | now follows symlinks and shows hidden files shows hidden files |
-| `<leader>fw` | disabled                                                       |
-| `<leader>fs` | does the live-grep instead                                     |
+| key          | effect                                         |
+| ------------ | ---------------------------------------------- |
+| `<leader>ff` | now follows symlinks                           |
+| `<leader>fa` | now shows all Files in (including hidden once) |
+| `<leader>fw` | disabled                                       |
+| `<leader>fs` | does the live-grep instead                     |
 
 ## In Visual-Mode enhancements.
 
 you can press one of the following keys to **surround** what is selected with
 the following characters
 
-| key | surround     |
-| --- | ------------ |
-| `(` | `(Selected)` |
-| `[` | `[Selected]` |
-| `{` | `{Selected}` |
-| `.` | `.Selected.` |
-| `"` | `"Selected"` |
-| `'` | `'Selected'` |
-| `-` | `-Selected-` |
-| `_` | `_Selected_` |
-| `*` | `*Selected*` |
-| `~` | `~Selected~` |
-| `/` | `/Selected/` |
+| key     | surround         |
+| ------- | ---------------- |
+| `(`     | `(Selected)`     |
+| `[`     | `[Selected]`     |
+| `{`     | `{Selected}`     |
+| `.`     | `.Selected.`     |
+| `"`     | `"Selected"`     |
+| `'`     | `'Selected'`     |
+| `-`     | `-Selected-`     |
+| `_`     | `_Selected_`     |
+| `*`     | `*Selected*`     |
+| `~`     | `~Selected~`     |
+| `/`     | `Selected`       |
+| `` ` `` | `` `Selected` `` |
 
 so pressing `viw*/` on a word quickly wraps it into a block comment.\
 `word` => `/*word*/`
@@ -140,3 +142,13 @@ TMUX and Vim is seemless.
 
 via `E h|j|k|l` you can create a new split in any of the 4 cardinal directions
 from the current editor.
+
+## Markdown Shortcuts
+pressing the following sequences in Normale Mode will do:
+
+| Sequence | Action                          |
+| -------- | ------------------------------- |
+| `qt`     | turn line into a Todo Task      |
+| `qd`     | turn line into a done Todo Task |
+| `qc`     | strike line                     |
+| `qx`     | remove strike and Todo-checkbox |

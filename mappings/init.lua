@@ -257,6 +257,7 @@ M.general = {
     ["*"] = { "c**<ESC>hmzplv`z", opts = { silent = true } },
     ["~"] = { "c~~<ESC>hmzplv`z", opts = { silent = true } },
     ["/"] = { "c//<ESC>hmzplv`z", opts = { silent = true } },
+    ["`"] = { "c``<ESC>hmzplv`z", opts = { silent = true } },
 
     ["q-"] = { ftMappings("q-", "v") },
     ["q."] = { ftMappings("q.", "v") },
