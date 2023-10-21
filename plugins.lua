@@ -23,6 +23,8 @@ local plugins = {
     end,
   },
 
+  { "mzlogin/vim-markdown-toc", ft = { "markdown"} },
+
   {
     "rcarriga/nvim-dap-ui",
     lazy = false,
